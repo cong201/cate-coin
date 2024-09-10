@@ -3,6 +3,8 @@ import { BsCopy } from "react-icons/bs";
 import { toast } from "react-toastify";
 const title1 = "fdsjhf";
 const title2 = "copcai cccc";
+import "react-toastify/dist/ReactToastify.css";
+import { Button } from "../ui/button";
 const About = () => {
   const [_, setCopiedText] = useState("");
 
@@ -11,11 +13,6 @@ const About = () => {
       setCopiedText(text);
       toast.success("Address has been copied!", {
         position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
       });
       setTimeout(() => setCopiedText(""), 2000);
     });
@@ -65,6 +62,50 @@ const About = () => {
               <p className="text-xl font-bold">Ethereum Address</p>
               <BsCopy className="w-[16px] h-[16px]" />
             </div>
+          </div>
+        </div>
+      </section>
+      <section className="flex gap-[20px] mt-[20px]">
+        <div className="flex items-center justify-center w-[50%] bg-[#004b96] h-[425px] rounded-[25px] px-[40px] group">
+          <div className="flex flex-col w-[30%]">
+            <p className="text-[28px] text-white font-bold">Whitepaper</p>
+            <span className="text-3xl font-semibold text-white mt-[10px]">
+              View our White <br />
+              Paper Below.
+            </span>
+            <Button className="mt-[40px] bg-[#e5e5e5b3] text-2xl py-10 px-10 rounded-[32px] font-bold">
+              Read Whitepaper
+            </Button>
+          </div>
+          <div className="bg-cover bg-center w-[70%]">
+            <img
+              className="w-[600px] transform transition-transform duration-500 group-hover:rotate-6 group-hover:translate-x-5"
+              src="//babydoge.com/cdn/shop/t/84/assets/mask-group-113@1x.png?v=24741498393696319751706708025"
+              alt=""
+            />
+          </div>
+        </div>
+
+        <div className="flex items-center w-[50%] bg-[#4a7dfc] h-[425px] rounded-[25px] pl-[40px] group">
+          <div>
+            <p className="text-[28px] text-white font-bold mb-[10px]">
+              Swap Easily
+            </p>
+            <span className="text-3xl font-semibold text-white mt-[10px]">
+              Swap BNB Chain tokens <br />
+              at babydogeswap.com
+            </span>
+            <Button className="mt-[40px] bg-[#e5e5e5b3] text-2xl py-10 px-10 rounded-[32px] font-bold">
+              Swap Now
+            </Button>
+          </div>
+          <div className="bg-cover bg-center relative group">
+            <img
+              className="bg-cover bg-center h-full"
+              src="//babydoge.com/cdn/shop/t/84/assets/image-254@1x.png?v=100660130434342786681706708001"
+              alt=""
+            />
+            <div className="w-[68px] h-[60px] group-hover:shadow-[0_0_65px_rgba(243,231,13,0.7),0_0_65px_rgba(243,231,13,0.7)] absolute top-[17%] right-[40%] rounded-[32px]"></div>
           </div>
         </div>
       </section>

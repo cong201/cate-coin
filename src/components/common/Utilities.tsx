@@ -30,7 +30,7 @@ const Utilities = () => {
       >
         {ServiceData.map((item) => (
           <SwiperSlide key={item.title}>
-            <div className="flex flex-col justify-center mb-20 group relative shadow-lg p-0 text-white rounded-[40px] px-6 py-8 h-full w-[215px] lg:h-full min-h-[620px] lg:w-[389px] overflow-hidden cursor-pointer">
+            <div className="flex flex-col justify-center mb-20 group relative shadow-lg p-0 text-white rounded-[40px] px-6 py-8 h-full w-[215px] lg:h-full min-h-[620px] lg:w-[100%] overflow-hidden cursor-pointer">
               <div
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: `url(${item.backgroundImage})` }}
