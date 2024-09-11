@@ -6,6 +6,8 @@ import Values from "../../components/common/Values";
 import Comunity from "../../components/common/Comunity";
 import About from "../../components/common/About";
 import { ToastContainer } from "react-toastify";
+import Partners from "../../components/common/Partners";
+import Answers from "../../components/common/Answers";
 
 export const Route = createLazyFileRoute("/_layout/")({
   component: function LayoutComponent() {
@@ -34,20 +36,13 @@ export const Route = createLazyFileRoute("/_layout/")({
             </div>
           </div>
         </section>
-        <h1 className="text-4xl font-bold text-blue-500 mt-[40px] mb-[28px]">
-          As Seen In
-        </h1>
         <Clients />
-        <h1 className="text-4xl font-bold text-blue-500 mt-[40px] mb-[10px]">
-          About
-        </h1>
-        <p className="text-[40px] text-[#00344c] font-[900]">
-          The Baby Doge Utilities
-        </p>
         <Utilities />
         <Values />
         <Comunity />
         <About />
+        <Partners />
+        <Answers />
         <ToastContainer position="top-center" />
       </main>
     );

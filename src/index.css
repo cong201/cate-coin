@@ -130,11 +130,27 @@ div[data-orientation="vertical"] {
   }
 }
 
+@keyframes scroll-reverse {
+  0% {
+    transform: translateX(-200%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .animate-scroll {
   animation: scroll 240s linear infinite;
   display: flex;
   width: calc(250px * 76);
 }
+
+.animate-scroll-reverse {
+  animation: scroll-reverse 300s linear infinite;
+  display: flex;
+  width: calc(250px * 76);
+}
+
 .paused {
   animation-play-state: paused;
 }
