@@ -169,6 +169,28 @@ const Partners = () => {
           </div>
         </div>
       </div>
+      <div className="bg-[url('https://babydoge.com/cdn/shop/t/84/assets/mask-group-54@1x.png')] bg-cover bg-center w-full h-[182px] flex relative">
+        <div>
+          <img
+            className="bg-cover"
+            src="//babydoge.com/cdn/shop/t/84/assets/mask-group-55@1x.png?v=68713393199574543201706708033"
+            alt=""
+          />
+        </div>
+        <div className="absolute right-[40%] top-[20%] ">
+          <p className="text-[42px] text-white font-bold">
+            Be Part Of Our Pack
+          </p>
+          <span className="text-[20px] font-bold text-white">
+            Discover the most powerful crypto community
+          </span>
+        </div>
+        <div className="absolute right-[10%] top-[40%]">
+          <Button className="bg-blue-500 text-white font-bold text-2xl hover:bg-blue-600 px-10 py-8 rounded-[20px]">
+            Buy Baby Doge Coin
+          </Button>
+        </div>
+      </div>
     </main>
   );
 };

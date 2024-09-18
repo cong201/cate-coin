@@ -1,6 +1,12 @@
 import { Button } from "../ui/button";
 
 const Header = () => {
+  const handleScrollTo = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <main className="flex items-center justify-center">
       <section className="fixed top-[20px] z-[999] bg-white grid grid-cols-[1.5fr_6fr_1fr_1.5fr] gap-4 items-center py-4 px-8 rounded-[28px] w-[70%]">
@@ -13,25 +19,37 @@ const Header = () => {
           </a>
         </div>
         <div className="flex space-x-[36px] text-xl justify-center font-bold">
-          <a className="hover:text-blue-600" href="">
+          <a
+            className="hover:text-blue-600 hover:cursor-pointer"
+            onClick={() => handleScrollTo("about")}
+          >
             About
           </a>
-          <a className="hover:text-blue-600" href="">
+          <a
+            className="hover:text-blue-600 hover:cursor-pointer"
+            onClick={() => handleScrollTo("tokenomics")}
+          >
             Tokenomics
           </a>
-          <a className="hover:text-blue-600" href="">
+          <a className="hover:text-blue-600 hover:cursor-pointer" href="">
             Integration
           </a>
-          <a className="hover:text-blue-600" href="">
+          <a className="hover:text-blue-600 hover:cursor-pointer" href="">
             Charity
           </a>
-          <a className="hover:text-blue-600" href="">
+          <a
+            className="hover:text-blue-600 hover:cursor-pointer"
+            onClick={() => handleScrollTo("document")}
+          >
             Document
           </a>
-          <a className="hover:text-blue-600" href="">
+          <a className="hover:text-blue-600 hover:cursor-pointer" href="">
             Swap
           </a>
-          <a className="hover:text-blue-600" href="">
+          <a
+            className="hover:text-blue-600 hover:cursor-pointer"
+            onClick={() => handleScrollTo("contact")}
+          >
             Contact
           </a>
         </div>

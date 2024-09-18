@@ -8,6 +8,7 @@ import About from "../../components/common/About";
 import { ToastContainer } from "react-toastify";
 import Partners from "../../components/common/Partners";
 import Answers from "../../components/common/Answers";
+import Tokenomics from "../../components/common/Tokenomics";
 
 export const Route = createLazyFileRoute("/_layout/")({
   component: function LayoutComponent() {
@@ -37,12 +38,21 @@ export const Route = createLazyFileRoute("/_layout/")({
           </div>
         </section>
         <Clients />
-        <Utilities />
+        <section id="about">
+          <Utilities />
+        </section>
         <Values />
         <Comunity />
-        <About />
+        <section id="document">
+          <About />
+        </section>
+        <section id="tokenomics">
+          <Tokenomics />
+        </section>
         <Partners />
-        <Answers />
+        <section id="contact">
+          <Answers />
+        </section>
         <ToastContainer position="top-center" />
       </main>
     );
