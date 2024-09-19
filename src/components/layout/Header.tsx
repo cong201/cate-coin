@@ -31,10 +31,16 @@ const Header = () => {
           >
             Tokenomics
           </a>
-          <a className="hover:text-blue-600 hover:cursor-pointer" href="">
+          <a
+            className="hover:text-blue-600 hover:cursor-pointer"
+            href="/integrations"
+          >
             Integration
           </a>
-          <a className="hover:text-blue-600 hover:cursor-pointer" href="">
+          <a
+            className="hover:text-blue-600 hover:cursor-pointer"
+            onClick={() => handleScrollTo("charity")}
+          >
             Charity
           </a>
           <a

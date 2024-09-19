@@ -41,7 +41,9 @@ export const Route = createLazyFileRoute("/_layout/")({
         <section id="about">
           <Utilities />
         </section>
-        <Values />
+        <section id="charity">
+          <Values />
+        </section>
         <Comunity />
         <section id="document">
           <About />
