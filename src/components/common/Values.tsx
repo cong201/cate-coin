@@ -24,11 +24,7 @@ const Values = () => {
             </Button>
           </div>
           <div className="w-[50%]">
-            <img
-              className="w-[1600px]"
-              src="../../public/img/iphone.png"
-              alt=""
-            />
+            <img className="w-[1600px]" src="../../img/iphone.png" alt="" />
           </div>
         </section>
         <section className="flex gap-[20px] mt-[40px] mb-[40px]">

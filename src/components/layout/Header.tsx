@@ -1,4 +1,5 @@
 import { Button } from "../ui/button";
+import { useNavigate } from "@tanstack/react-router";
 
 const Header = () => {
   const handleScrollTo = (id: string) => {
@@ -7,6 +8,7 @@ const Header = () => {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+  const navigate = useNavigate();
   return (
     <main className="flex items-center justify-center">
       <section className="fixed top-[20px] z-[999] bg-white grid grid-cols-[1.5fr_6fr_1fr_1.5fr] gap-4 items-center py-4 px-8 rounded-[28px] w-[70%]">
@@ -68,7 +70,14 @@ const Header = () => {
           </a>
         </div>
         <div className="flex justify-end">
-          <Button className="bg-blue-500 text-white font-bold text-2xl hover:bg-blue-600 px-10 py-8 rounded-[20px]">
+          <Button
+            onClick={() =>
+              navigate({
+                to: `/app`,
+              })
+            }
+            className="bg-blue-500 text-white font-bold text-2xl hover:bg-blue-600 px-10 py-8 rounded-[20px]"
+          >
             Launch App
           </Button>
         </div>

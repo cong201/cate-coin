@@ -13,7 +13,9 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as LayoutAppImport } from './routes/_layoutApp'
 import { Route as LayoutImport } from './routes/_layout'
+import { Route as LayoutAppAppImport } from './routes/_layoutApp/app'
 
 // Create Virtual Routes
 
@@ -21,6 +23,11 @@ const LayoutIndexLazyImport = createFileRoute('/_layout/')()
 const LayoutIntegrationsLazyImport = createFileRoute('/_layout/integrations')()
 
 // Create/Update Routes
+
+const LayoutAppRoute = LayoutAppImport.update({
+  id: '/_layoutApp',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const LayoutRoute = LayoutImport.update({
   id: '/_layout',
@@ -39,6 +46,11 @@ const LayoutIntegrationsLazyRoute = LayoutIntegrationsLazyImport.update({
   import('./routes/_layout/integrations.lazy').then((d) => d.Route),
 )
 
+const LayoutAppAppRoute = LayoutAppAppImport.update({
+  path: '/app',
+  getParentRoute: () => LayoutAppRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -49,6 +61,20 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
+    }
+    '/_layoutApp': {
+      id: '/_layoutApp'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof LayoutAppImport
+      parentRoute: typeof rootRoute
+    }
+    '/_layoutApp/app': {
+      id: '/_layoutApp/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof LayoutAppAppImport
+      parentRoute: typeof LayoutAppImport
     }
     '/_layout/integrations': {
       id: '/_layout/integrations'
@@ -82,38 +108,62 @@ const LayoutRouteChildren: LayoutRouteChildren = {
 const LayoutRouteWithChildren =
   LayoutRoute._addFileChildren(LayoutRouteChildren)
 
+interface LayoutAppRouteChildren {
+  LayoutAppAppRoute: typeof LayoutAppAppRoute
+}
+
+const LayoutAppRouteChildren: LayoutAppRouteChildren = {
+  LayoutAppAppRoute: LayoutAppAppRoute,
+}
+
+const LayoutAppRouteWithChildren = LayoutAppRoute._addFileChildren(
+  LayoutAppRouteChildren,
+)
+
 interface FileRoutesByFullPath {
-  '': typeof LayoutRouteWithChildren
+  '': typeof LayoutAppRouteWithChildren
+  '/app': typeof LayoutAppAppRoute
   '/integrations': typeof LayoutIntegrationsLazyRoute
   '/': typeof LayoutIndexLazyRoute
 }
 
 interface FileRoutesByTo {
+  '': typeof LayoutAppRouteWithChildren
+  '/app': typeof LayoutAppAppRoute
   '/integrations': typeof LayoutIntegrationsLazyRoute
   '/': typeof LayoutIndexLazyRoute
 }
 
 interface FileRoutesById {
   '/_layout': typeof LayoutRouteWithChildren
+  '/_layoutApp': typeof LayoutAppRouteWithChildren
+  '/_layoutApp/app': typeof LayoutAppAppRoute
   '/_layout/integrations': typeof LayoutIntegrationsLazyRoute
   '/_layout/': typeof LayoutIndexLazyRoute
 }
 
 interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/integrations' | '/'
+  fullPaths: '' | '/app' | '/integrations' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/integrations' | '/'
-  id: '/_layout' | '/_layout/integrations' | '/_layout/'
+  to: '' | '/app' | '/integrations' | '/'
+  id:
+    | '/_layout'
+    | '/_layoutApp'
+    | '/_layoutApp/app'
+    | '/_layout/integrations'
+    | '/_layout/'
   fileRoutesById: FileRoutesById
 }
 
 interface RootRouteChildren {
   LayoutRoute: typeof LayoutRouteWithChildren
+  LayoutAppRoute: typeof LayoutAppRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   LayoutRoute: LayoutRouteWithChildren,
+  LayoutAppRoute: LayoutAppRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -128,7 +178,8 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/_layout"
+        "/_layout",
+        "/_layoutApp"
       ]
     },
     "/_layout": {
@@ -137,6 +188,16 @@ export const routeTree = rootRoute
         "/_layout/integrations",
         "/_layout/"
       ]
+    },
+    "/_layoutApp": {
+      "filePath": "_layoutApp.tsx",
+      "children": [
+        "/_layoutApp/app"
+      ]
+    },
+    "/_layoutApp/app": {
+      "filePath": "_layoutApp/app.tsx",
+      "parent": "/_layoutApp"
     },
     "/_layout/integrations": {
       "filePath": "_layout/integrations.lazy.tsx",
