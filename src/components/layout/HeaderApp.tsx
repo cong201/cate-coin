@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
 
 const HeaderApp = () => {
   const [isHovered, setIsHovered] = useState<string | null>(null);
@@ -10,9 +11,29 @@ const HeaderApp = () => {
   const handleMouseLeave = () => {
     setIsHovered(null);
   };
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <main className="bg-[#06334B] px-[10%] flex justify-between items-center">
+    <main
+      className={`fixed flex justify-between items-center top-0 left-0 w-full bg-[#06334B] px-[10%] z-[1000] text-white transition-transform duration-300 ${
+        isScrolled ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <section className="flex items-center gap-[15px]">
         <div>
           <a href="/app">
@@ -31,9 +52,9 @@ const HeaderApp = () => {
           >
             Swap
             <ul
-              className={`absolute flex flex-col gap-[10px] font-normal px-[10px] pt-[15px] pb-[15px] m-0 top-full left-0 w-[200px] list-none border border-solid border-[#06334B] rounded-[20px] bg-[#06334B] max-h-[150px] box-border ${
+              className={`absolute flex flex-col gap-[10px] font-normal px-[10px] pt-[15px] pb-[15px] m-0 top-full left-0 w-[200px] list-none border border-solid border-[#06334B] rounded-[20px] bg-[#06334B] max-h-[150px] box-border z-5000000 ${
                 isHovered === "item-2" ? "block" : "hidden"
-              }`}
+              } `}
             >
               <li>Swap</li>
               <li>Bump Portor</li>
@@ -47,9 +68,9 @@ const HeaderApp = () => {
           >
             Earn
             <ul
-              className={`absolute flex flex-col gap-[10px] font-normal px-[10px] pt-[15px] pb-[15px] m-0 top-full left-0 w-[200px] list-none border border-solid border-[#06334B] rounded-[20px] bg-[#06334B] max-h-[150px] box-border ${
+              className={`absolute flex flex-col gap-[10px] font-normal px-[10px] pt-[15px] pb-[15px] m-0 top-full left-0 w-[200px] list-none border border-solid border-[#06334B] rounded-[20px] bg-[#06334B] max-h-[150px] box-border z-5000000 ${
                 isHovered === "item-3" ? "block" : "hidden"
-              }`}
+              } z-5000`}
             >
               <li>Farms</li>
               <li>Pools</li>
@@ -66,9 +87,9 @@ const HeaderApp = () => {
           >
             NFTs
             <ul
-              className={`absolute flex flex-col gap-[10px] font-normal px-[10px] pt-[15px] pb-[15px] m-0 top-full left-0 w-[200px] list-none border border-solid border-[#06334B] rounded-[20px] bg-[#06334B] max-h-[150px] box-border ${
+              className={`absolute flex flex-col gap-[10px] font-normal px-[10px] pt-[15px] pb-[15px] m-0 top-full left-0 w-[200px] list-none border border-solid border-[#06334B] rounded-[20px] bg-[#06334B] max-h-[150px] box-border z-5000000 ${
                 isHovered === "item-4" ? "block" : "hidden"
-              }`}
+              } z-5000`}
             >
               <li>AI creator</li>
               <li>NFT marketplace</li>
@@ -86,10 +107,23 @@ const HeaderApp = () => {
           alt=""
         />
         <div className="flex gap-[5px] items-center justify-center">
-          <div className="flex items-center justify-center">
+          <div className="mt-[6px]">
             <svg
-              width="32"
-              height="32"
+              width="30"
+              height="30"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10.955,0A10.955,10.955,0,1,0,21.91,10.955,10.968,10.968,0,0,0,10.955,0m8.138,6.691H15.929a13.351,13.351,0,0,0-1.519-4.25,9.243,9.243,0,0,1,4.682,4.25m1.053,4.264a9.164,9.164,0,0,1-.348,2.5H16.192a23.754,23.754,0,0,0,.13-2.5,23.756,23.756,0,0,0-.13-2.5H19.8a9.165,9.165,0,0,1,.348,2.5m-9.191,9.191c-.8,0-1.689-.907-2.365-2.427a13.1,13.1,0,0,1-.8-2.5h6.326a13.1,13.1,0,0,1-.8,2.5c-.677,1.52-1.561,2.427-2.365,2.427M7.5,13.455a21.623,21.623,0,0,1,0-5h6.915a21.353,21.353,0,0,1,.145,2.5,21.352,21.352,0,0,1-.145,2.5Zm-5.733-2.5a9.165,9.165,0,0,1,.348-2.5H5.718a24.021,24.021,0,0,0,0,5H2.113a9.164,9.164,0,0,1-.348-2.5m9.191-9.191c.8,0,1.689.907,2.365,2.427a13.106,13.106,0,0,1,.8,2.5H7.792a13.106,13.106,0,0,1,.8-2.5c.677-1.52,1.561-2.427,2.365-2.427M7.5,2.441a13.348,13.348,0,0,0-1.519,4.25H2.818A9.243,9.243,0,0,1,7.5,2.441M2.818,15.22H5.981A13.35,13.35,0,0,0,7.5,19.469a9.243,9.243,0,0,1-4.682-4.25m11.593,4.25a13.354,13.354,0,0,0,1.519-4.25h3.163a9.243,9.243,0,0,1-4.682,4.25"
+                fill="#2b1de6"
+              />
+            </svg>
+          </div>
+          <div className="mt-[6px]">
+            <svg
+              width="30"
+              height="30"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -113,6 +147,11 @@ const HeaderApp = () => {
               />
             </svg>
           </div>
+        </div>
+        <div>
+          <Button className="bg-blue-500 text-white font-bold text-xl hover:bg-blue-600 px-10 py-7 rounded-[20px]">
+            Connect Wallet
+          </Button>
         </div>
       </section>
     </main>
