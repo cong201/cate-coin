@@ -1,8 +1,9 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
-import { Fragment } from "react/jsx-runtime";
+import { Fragment } from "react";
 import { ToastContainer } from "react-toastify";
 import HeaderApp from "../components/layout/HeaderApp";
 import FooterApp from "../components/layout/FooterApp";
+import { ActiveProvider } from "../context/ActiveContext";
 
 export const Route = createFileRoute("/_layoutApp")({
   component: MainLayoutComponent,
@@ -10,13 +11,15 @@ export const Route = createFileRoute("/_layoutApp")({
 
 function MainLayoutComponent() {
   return (
-    <Fragment>
-      <HeaderApp />
-      <main>
-        <Outlet />
-      </main>
-      <FooterApp />
-      <ToastContainer position="top-right" newestOnTop />
-    </Fragment>
+    <ActiveProvider>
+      <Fragment>
+        <HeaderApp />
+        <main>
+          <Outlet />
+        </main>
+        <FooterApp />
+        <ToastContainer position="top-right" newestOnTop />
+      </Fragment>
+    </ActiveProvider>
   );
 }
