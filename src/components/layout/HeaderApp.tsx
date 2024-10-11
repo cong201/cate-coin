@@ -16,12 +16,11 @@ const HeaderApp = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
-        setIsScrolled(true);
-      } else {
         setIsScrolled(false);
+      } else {
+        setIsScrolled(true);
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -30,7 +29,7 @@ const HeaderApp = () => {
 
   return (
     <main
-      className={`fixed flex justify-between items-center top-0 left-0 w-full bg-[#06334B] px-[10%] z-[1000] text-white transition-transform duration-300 ${
+      className={`fixed flex justify-between items-center py-[10px] top-0 left-0 w-full bg-[#06334B] px-[10%] z-[1000] text-white transition-transform duration-300 ${
         isScrolled ? "translate-y-0" : "-translate-y-full"
       }`}
     >

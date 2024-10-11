@@ -25,13 +25,13 @@ const FooterApp = () => {
           />
         </div>
         <div
-          className={`w-[80px] rounded-[28px] bg-gray-300 h-[36px] flex items-center ${
+          className={`w-[80px] rounded-[28px] bg-blue-400 h-[36px] flex items-center ${
             active ? "justify-end" : "justify-start"
           } cursor-pointer`}
           onClick={toggleActive}
         >
           {active ? (
-            <div className="w-[50%] h-full bg-white rounded-[50%] flex items-center justify-center">
+            <div className="w-[50%] h-full bg-gray-300 rounded-[50%] flex items-center justify-center">
               <MdNightlight className="w-[30px] h-[28px]" />
             </div>
           ) : (
