@@ -2,14 +2,10 @@ import { Button } from "../ui/button";
 import { GoArrowRight } from "react-icons/go";
 import { MdNightlight } from "react-icons/md";
 import { FiSun } from "react-icons/fi";
-import { useState } from "react";
+import { useActive } from "../../context/ActiveContext";
 
 const FooterApp = () => {
-  const [active, setActive] = useState(false);
-
-  const toggleActive = () => {
-    setActive((prev) => !prev);
-  };
+  const { active, toggleActive } = useActive();
 
   return (
     <main

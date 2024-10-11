@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
+import { useActive } from "../../context/ActiveContext";
+import { IoIosLogOut } from "react-icons/io";
 
 const HeaderApp = () => {
+  const { active } = useActive();
   const [isHovered, setIsHovered] = useState<string | null>(null);
 
   const handleMouseEnter = (item: string) => {
@@ -21,6 +24,7 @@ const HeaderApp = () => {
         setIsScrolled(true);
       }
     };
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -29,7 +33,9 @@ const HeaderApp = () => {
 
   return (
     <main
-      className={`fixed flex justify-between items-center py-[10px] top-0 left-0 w-full bg-[#06334B] px-[10%] z-[1000] text-white transition-transform duration-300 ${
+      className={`fixed flex justify-between items-center py-[10px] top-0 left-0 w-full ${
+        !active ? "bg-white text-black" : "bg-[#06334B] text-white"
+      } px-[10%] z-[1000] transition-transform duration-300 ${
         isScrolled ? "translate-y-0" : "-translate-y-full"
       }`}
     >
@@ -47,13 +53,21 @@ const HeaderApp = () => {
           <li
             onMouseEnter={() => handleMouseEnter("item-2")}
             onMouseLeave={handleMouseLeave}
-            className="text-white font-medium relative text-[12px] list-none hover:cursor-pointer min-w-[45px] h-[50px] hover:bg-[#3e97c7] hover:rounded-[20px] flex items-center justify-center"
+            className={`font-medium relative text-[12px] list-none hover:cursor-pointer min-w-[45px] h-[50px] flex items-center justify-center ${
+              !active
+                ? "hover:bg-gray-300 text-black"
+                : "hover:bg-[#3e97c7] text-white"
+            } hover:rounded-[20px]`}
           >
             Swap
             <ul
-              className={`absolute flex flex-col gap-[10px] font-normal px-[10px] pt-[15px] pb-[15px] m-0 top-full left-0 w-[200px] list-none border border-solid border-[#06334B] rounded-[20px] bg-[#06334B] max-h-[150px] box-border z-5000000 ${
+              className={`absolute flex flex-col gap-[10px] font-normal px-[10px] pt-[15px] pb-[15px] m-0 top-full left-0 w-[200px] list-none border border-solid  rounded-[20px]  max-h-[150px] box-border z-5000000 ${
                 isHovered === "item-2" ? "block" : "hidden"
-              } `}
+              } ${
+                !active
+                  ? "bg-white border-white text-black"
+                  : "border-[#06334B] bg-[#06334B] text-white"
+              } z-5000`}
             >
               <li>Swap</li>
               <li>Bump Portor</li>
@@ -63,12 +77,20 @@ const HeaderApp = () => {
           <li
             onMouseEnter={() => handleMouseEnter("item-3")}
             onMouseLeave={handleMouseLeave}
-            className="text-white font-medium relative text-[12px] list-none hover:cursor-pointer flex items-center justify-center hover:bg-[#3e97c7] hover:rounded-[20px] min-w-[45px] h-[50px]"
+            className={`font-medium relative text-[12px] list-none hover:cursor-pointer min-w-[45px] h-[50px] flex items-center justify-center ${
+              !active
+                ? "hover:bg-gray-300 text-black"
+                : "hover:bg-[#3e97c7] text-white"
+            } hover:rounded-[20px]`}
           >
             Earn
             <ul
-              className={`absolute flex flex-col gap-[10px] font-normal px-[10px] pt-[15px] pb-[15px] m-0 top-full left-0 w-[200px] list-none border border-solid border-[#06334B] rounded-[20px] bg-[#06334B] max-h-[150px] box-border z-5000000 ${
+              className={`absolute flex flex-col gap-[10px] font-normal px-[10px] pt-[15px] pb-[15px] m-0 top-full left-0 w-[200px] list-none border border-solid  rounded-[20px]  max-h-[150px] box-border z-5000000 ${
                 isHovered === "item-3" ? "block" : "hidden"
+              } ${
+                !active
+                  ? "bg-white border-white text-black"
+                  : "border-[#06334B] bg-[#06334B] text-white"
               } z-5000`}
             >
               <li>Farms</li>
@@ -76,26 +98,77 @@ const HeaderApp = () => {
               <li>Create your own</li>
             </ul>
           </li>
-          <li className="text-white font-medium text-[12px] list-none hover:cursor-pointer flex items-center justify-center hover:bg-[#3e97c7] hover:rounded-[20px] min-w-[45px] h-[50px]">
+          <li
+            className={` font-medium text-[12px] list-none hover:cursor-pointer flex items-center justify-center hover:rounded-[20px] min-w-[45px] h-[50px] ${
+              !active
+                ? "hover:bg-gray-300 text-black"
+                : "hover:bg-[#3e97c7] text-white"
+            }`}
+          >
             Info
           </li>
           <li
             onMouseEnter={() => handleMouseEnter("item-4")}
             onMouseLeave={handleMouseLeave}
-            className="text-white font-medium relative text-[12px] list-none hover:cursor-pointer flex items-center justify-center hover:bg-[#3e97c7] hover:rounded-[20px] min-w-[45px] h-[50px]"
+            className={`font-medium relative text-[12px] list-none hover:cursor-pointer min-w-[45px] h-[50px] flex items-center justify-center ${
+              !active
+                ? "hover:bg-gray-300 text-black"
+                : "hover:bg-[#3e97c7] text-white"
+            } hover:rounded-[20px]`}
           >
             NFTs
             <ul
-              className={`absolute flex flex-col gap-[10px] font-normal px-[10px] pt-[15px] pb-[15px] m-0 top-full left-0 w-[200px] list-none border border-solid border-[#06334B] rounded-[20px] bg-[#06334B] max-h-[150px] box-border z-5000000 ${
+              className={`absolute flex flex-col gap-[10px] font-normal px-[10px] pt-[15px] pb-[15px] m-0 top-full left-0 w-[200px] list-none border border-solid  rounded-[20px]  max-h-[150px] box-border z-5000000 ${
                 isHovered === "item-4" ? "block" : "hidden"
+              } ${
+                !active
+                  ? "bg-white border-white text-black"
+                  : "border-[#06334B] bg-[#06334B] text-white"
               } z-5000`}
             >
               <li>AI creator</li>
               <li>NFT marketplace</li>
             </ul>
           </li>
-          <li className="text-white font-medium text-[12px] list-none hover:cursor-pointer flex items-center justify-center hover:bg-[#3e97c7] hover:rounded-[20px] min-w-[45px] h-[50px]">
-            More
+          <li
+            onMouseEnter={() => handleMouseEnter("item-5")}
+            onMouseLeave={handleMouseLeave}
+            className={`font-medium relative text-[12px] list-none hover:cursor-pointer min-w-[45px] h-[50px] flex items-center justify-center ${
+              !active
+                ? "hover:bg-gray-300 text-black"
+                : "hover:bg-[#3e97c7] text-white"
+            } hover:rounded-[20px]`}
+          >
+            NFTs
+            <ul
+              className={`absolute flex flex-col gap-[10px] font-normal px-[10px] pt-[15px] pb-[15px] m-0 top-full left-0 w-[200px] list-none border border-solid  rounded-[20px]  max-h-[450px] box-border z-5000000 ${
+                isHovered === "item-5" ? "block" : "hidden"
+              } ${
+                !active
+                  ? "bg-white border-white text-black"
+                  : "border-[#06334B] bg-[#06334B] text-white"
+              } z-5000`}
+            >
+              <a href="/tokenFree">Free Token Locker</a>
+              <li>Voting</li>
+              <li>Use Our Widget</li>
+              <li>Buy With Flat</li>
+              <li>Crypto Card</li>
+              <li>Parternships</li>
+              <li>Impact</li>
+
+              <hr className="w-full border-0 h-[2px] bg-gray-300" />
+
+              <li className="flex justify-between items-center">
+                BabyDoge Bridge <IoIosLogOut />
+              </li>
+              <li className="flex justify-between items-center">
+                BabyDoge Chess <IoIosLogOut />
+              </li>
+              <a href="/" className="flex justify-between items-center">
+                About Us <IoIosLogOut />
+              </a>
+            </ul>
           </li>
         </div>
       </section>

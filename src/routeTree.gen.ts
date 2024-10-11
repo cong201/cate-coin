@@ -15,6 +15,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRoute } from './routes/__root'
 import { Route as LayoutAppImport } from './routes/_layoutApp'
 import { Route as LayoutImport } from './routes/_layout'
+import { Route as LayoutAppTokenFreeImport } from './routes/_layoutApp/tokenFree'
 import { Route as LayoutAppAppImport } from './routes/_layoutApp/app'
 
 // Create Virtual Routes
@@ -46,6 +47,11 @@ const LayoutIntegrationsLazyRoute = LayoutIntegrationsLazyImport.update({
   import('./routes/_layout/integrations.lazy').then((d) => d.Route),
 )
 
+const LayoutAppTokenFreeRoute = LayoutAppTokenFreeImport.update({
+  path: '/tokenFree',
+  getParentRoute: () => LayoutAppRoute,
+} as any)
+
 const LayoutAppAppRoute = LayoutAppAppImport.update({
   path: '/app',
   getParentRoute: () => LayoutAppRoute,
@@ -74,6 +80,13 @@ declare module '@tanstack/react-router' {
       path: '/app'
       fullPath: '/app'
       preLoaderRoute: typeof LayoutAppAppImport
+      parentRoute: typeof LayoutAppImport
+    }
+    '/_layoutApp/tokenFree': {
+      id: '/_layoutApp/tokenFree'
+      path: '/tokenFree'
+      fullPath: '/tokenFree'
+      preLoaderRoute: typeof LayoutAppTokenFreeImport
       parentRoute: typeof LayoutAppImport
     }
     '/_layout/integrations': {
@@ -110,10 +123,12 @@ const LayoutRouteWithChildren =
 
 interface LayoutAppRouteChildren {
   LayoutAppAppRoute: typeof LayoutAppAppRoute
+  LayoutAppTokenFreeRoute: typeof LayoutAppTokenFreeRoute
 }
 
 const LayoutAppRouteChildren: LayoutAppRouteChildren = {
   LayoutAppAppRoute: LayoutAppAppRoute,
+  LayoutAppTokenFreeRoute: LayoutAppTokenFreeRoute,
 }
 
 const LayoutAppRouteWithChildren = LayoutAppRoute._addFileChildren(
@@ -123,6 +138,7 @@ const LayoutAppRouteWithChildren = LayoutAppRoute._addFileChildren(
 interface FileRoutesByFullPath {
   '': typeof LayoutAppRouteWithChildren
   '/app': typeof LayoutAppAppRoute
+  '/tokenFree': typeof LayoutAppTokenFreeRoute
   '/integrations': typeof LayoutIntegrationsLazyRoute
   '/': typeof LayoutIndexLazyRoute
 }
@@ -130,6 +146,7 @@ interface FileRoutesByFullPath {
 interface FileRoutesByTo {
   '': typeof LayoutAppRouteWithChildren
   '/app': typeof LayoutAppAppRoute
+  '/tokenFree': typeof LayoutAppTokenFreeRoute
   '/integrations': typeof LayoutIntegrationsLazyRoute
   '/': typeof LayoutIndexLazyRoute
 }
@@ -138,19 +155,21 @@ interface FileRoutesById {
   '/_layout': typeof LayoutRouteWithChildren
   '/_layoutApp': typeof LayoutAppRouteWithChildren
   '/_layoutApp/app': typeof LayoutAppAppRoute
+  '/_layoutApp/tokenFree': typeof LayoutAppTokenFreeRoute
   '/_layout/integrations': typeof LayoutIntegrationsLazyRoute
   '/_layout/': typeof LayoutIndexLazyRoute
 }
 
 interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/app' | '/integrations' | '/'
+  fullPaths: '' | '/app' | '/tokenFree' | '/integrations' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '' | '/app' | '/integrations' | '/'
+  to: '' | '/app' | '/tokenFree' | '/integrations' | '/'
   id:
     | '/_layout'
     | '/_layoutApp'
     | '/_layoutApp/app'
+    | '/_layoutApp/tokenFree'
     | '/_layout/integrations'
     | '/_layout/'
   fileRoutesById: FileRoutesById
@@ -192,11 +211,16 @@ export const routeTree = rootRoute
     "/_layoutApp": {
       "filePath": "_layoutApp.tsx",
       "children": [
-        "/_layoutApp/app"
+        "/_layoutApp/app",
+        "/_layoutApp/tokenFree"
       ]
     },
     "/_layoutApp/app": {
       "filePath": "_layoutApp/app.tsx",
+      "parent": "/_layoutApp"
+    },
+    "/_layoutApp/tokenFree": {
+      "filePath": "_layoutApp/tokenFree.tsx",
       "parent": "/_layoutApp"
     },
     "/_layout/integrations": {

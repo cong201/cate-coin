@@ -1,18 +1,25 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useState, useContext, ReactNode } from "react";
 
 interface ActiveContextType {
   active: boolean;
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleActive: () => void;
 }
 
 const ActiveContext = createContext<ActiveContextType | undefined>(undefined);
 
-export const ActiveProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
-  const [active, setActive] = useState(false);
+interface ActiveProviderProps {
+  children: ReactNode;
+}
+
+export const ActiveProvider = ({ children }: ActiveProviderProps) => {
+  const [active, setActive] = useState(true);
+
+  const toggleActive = () => {
+    setActive((prev) => !prev);
+  };
+
   return (
-    <ActiveContext.Provider value={{ active, setActive }}>
+    <ActiveContext.Provider value={{ active, toggleActive }}>
       {children}
     </ActiveContext.Provider>
   );
