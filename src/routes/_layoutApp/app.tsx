@@ -109,7 +109,11 @@ export const Route = createFileRoute("/_layoutApp/app")({
               >
                 Baby Doge Coin Holder
               </p>
-              <span className="text-[12px]">all time</span>
+              <span
+                className={`text-[12px] ${active ? `text-white` : `text-black`}`}
+              >
+                all time
+              </span>
               <p className="text-[#008fef7f] text-[32px] font-bold">0</p>
             </div>
           </div>
@@ -127,7 +131,11 @@ export const Route = createFileRoute("/_layoutApp/app")({
               >
                 TVL{" "}
               </p>
-              <span className="text-[12px]">Total Value Locked</span>
+              <span
+                className={`text-[12px] ${active ? `text-white` : `text-black`}`}
+              >
+                Total Value Locked
+              </span>
               <p className="text-[#008fef7f] text-[32px] font-bold">0,00</p>
             </div>
           </div>
@@ -145,7 +153,11 @@ export const Route = createFileRoute("/_layoutApp/app")({
               >
                 Swaps
               </p>
-              <span className="text-[12px]">in the last 24 hours</span>
+              <span
+                className={`text-[12px] ${active ? `text-white` : `text-black`}`}
+              >
+                in the last 24 hours
+              </span>
               <p className="text-[#008fef7f] text-[32px] font-bold">0</p>
             </div>
           </div>
