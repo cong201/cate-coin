@@ -69,9 +69,9 @@ const HeaderApp = () => {
                   : "border-[#06334B] bg-[#06334B] text-white"
               } z-5000`}
             >
-              <li>Swap</li>
-              <li>Bump Portor</li>
-              <li>Liquidity</li>
+              <li className="hover:text-blue-600">Swap</li>
+              <li className="hover:text-blue-600">Bump Portor</li>
+              <li className="hover:text-blue-600">Liquidity</li>
             </ul>
           </li>
           <li
@@ -93,9 +93,9 @@ const HeaderApp = () => {
                   : "border-[#06334B] bg-[#06334B] text-white"
               } z-5000`}
             >
-              <li>Farms</li>
-              <li>Pools</li>
-              <li>Create your own</li>
+              <li className="hover:text-blue-600">Farms</li>
+              <li className="hover:text-blue-600">Pools</li>
+              <li className="hover:text-blue-600">Create your own</li>
             </ul>
           </li>
           <li
@@ -126,8 +126,8 @@ const HeaderApp = () => {
                   : "border-[#06334B] bg-[#06334B] text-white"
               } z-5000`}
             >
-              <li>AI creator</li>
-              <li>NFT marketplace</li>
+              <li className="hover:text-blue-600">AI creator</li>
+              <li className="hover:text-blue-600">NFT marketplace</li>
             </ul>
           </li>
           <li
@@ -149,23 +149,28 @@ const HeaderApp = () => {
                   : "border-[#06334B] bg-[#06334B] text-white"
               } z-5000`}
             >
-              <a href="/tokenFree">Free Token Locker</a>
-              <li>Voting</li>
-              <li>Use Our Widget</li>
-              <li>Buy With Flat</li>
-              <li>Crypto Card</li>
-              <li>Parternships</li>
-              <li>Impact</li>
+              <a href="/tokenFree" className="hover:text-blue-600">
+                Free Token Locker
+              </a>
+              <li className="hover:text-blue-600">Voting</li>
+              <li className="hover:text-blue-600">Use Our Widget</li>
+              <li className="hover:text-blue-600">Buy With Flat</li>
+              <li className="hover:text-blue-600">Crypto Card</li>
+              <li className="hover:text-blue-600">Parternships</li>
+              <li className="hover:text-blue-600">Impact</li>
 
               <hr className="w-full border-0 h-[2px] bg-gray-300" />
 
-              <li className="flex justify-between items-center">
+              <li className="flex justify-between items-center hover:text-blue-600">
                 BabyDoge Bridge <IoIosLogOut />
               </li>
-              <li className="flex justify-between items-center">
+              <li className="flex justify-between items-center hover:text-blue-600">
                 BabyDoge Chess <IoIosLogOut />
               </li>
-              <a href="/" className="flex justify-between items-center">
+              <a
+                href="/"
+                className="flex justify-between items-center hover:text-blue-600"
+              >
                 About Us <IoIosLogOut />
               </a>
             </ul>

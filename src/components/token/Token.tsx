@@ -1,51 +1,43 @@
 import { useActive } from "../../context/ActiveContext";
 import { cn } from "../../lib/utils";
+import { formatDateTime } from "../custom/CustomDate";
 
-const items = [
-  {
-    id: "https://tokens.babydogenews.com/bsc-mainnet/0xba2ae424d960c26247dd6c32edc70b295c744c43/token-logo-small.png",
-    name: "Cat",
-    des: "BOG",
-    total: "79.24",
-    trans: "$1.53 USD",
-    time: "47 D",
-  },
-  {
-    id: "https://tokens.babydogenews.com/bsc-mainnet/0x7cf551258d6871b72ee1bd1624588a6245bf48c4/token-logo-small.png",
-    name: "Bogged Finance",
-    des: "CAT",
-    total: "1316897185.79",
-    trans: "$1.61 USD",
-    time: "47 D",
-  },
-  {
-    id: "https://tokens.babydogenews.com/bsc-mainnet/0x0173295183685f27c84db046b5f0bea3e683c24b/token-logo-small.png",
-    name: "ChitCAT",
-    des: "CHITCAT",
-    total: "200000.00",
-    trans: "$0.00 USD",
-    time: "0 D",
-  },
-  {
-    id: "https://tokens.babydogenews.com/bsc-mainnet/0xb09fe1613fe03e7361319d2a43edc17422f36b09/token-logo-small.png",
-    name: "ChitCAT",
-    des: "CHITCAT",
-    total: "200000.00",
-    trans: "$0.00 USD",
-    time: "0 D",
-  },
-  {
-    id: "https://tokens.babydogenews.com/bsc-mainnet/0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d/token-logo-small.png",
-    name: "ChitCAT",
-    des: "CHITCAT",
-    total: "200000.00",
-    trans: "$0.00 USD",
-    time: "0 D",
-  },
-];
+interface TokenProps {
+  tokenData: Token[];
+}
 
-const MyToken = () => {
+export interface Token {
+  id: string;
+  symbol: string;
+  name: string;
+  image: string;
+  current_price: number;
+  market_cap: number;
+  market_cap_rank: number;
+  fully_diluted_valuation: number;
+  total_volume: number;
+  high_24h: number;
+  low_24h: number;
+  price_change_24h: number;
+  price_change_percentage_24h: number;
+  market_cap_change_24h: number;
+  market_cap_change_percentage_24h: number;
+  circulating_supply: number;
+  total_supply: number;
+  max_supply: number;
+  ath: number;
+  ath_change_percentage: number;
+  ath_date: string;
+  atl: number;
+  atl_change_percentage: number;
+  atl_date: string;
+  roi: any;
+  last_updated: string;
+}
+
+const Token: React.FC<TokenProps> = ({ tokenData }) => {
   const { active } = useActive();
+
   return (
     <div className="flex justify-center w-full px-[10%] py-[2%]">
       <table
@@ -65,9 +57,9 @@ const MyToken = () => {
             <td>Lock Time Remaining</td>
             <td></td>
           </tr>
-          {items.map((item, index) => {
+          {tokenData.map((item, index) => {
             const isFirstRow = index === 0;
-            const isLastRow = index === items.length - 1;
+            const isLastRow = index === tokenData.length - 1;
             return (
               <tr
                 key={item.id}
@@ -79,20 +71,20 @@ const MyToken = () => {
                   className={`${isFirstRow ? "rounded-tl-3xl" : ""} ${isLastRow ? "rounded-bl-3xl" : ""} `}
                 >
                   <img
-                    src={item.id}
+                    src={item.image}
                     alt=""
                     className="rounded-[50%] w-[32px] h-[32px]"
                   />
                 </td>
                 <td className="flex gap-[4px] flex-col justify-start">
                   <p className="font-bold">{item.name}</p>
-                  <p className="text-[12px]">{item.des}</p>
+                  <p className="text-[12px]">{item.symbol}</p>
                 </td>
                 <td className="gap-[4px]">
-                  <p>{item.total}</p>
-                  <p>{item.trans}</p>
+                  <p>{item.price_change_24h}</p>
+                  <p>{item.current_price} $</p>
                 </td>
-                <td>{item.time}</td>
+                <td>{formatDateTime(item.last_updated)}</td>
                 <td
                   className={`${isFirstRow ? "rounded-tr-3xl" : ""} ${isLastRow ? "rounded-br-3xl" : ""} text-blue-600 font-bold hover:cursor-pointer hover:text-blue-400`}
                 >
@@ -107,4 +99,4 @@ const MyToken = () => {
   );
 };
 
-export default MyToken;
+export default Token;

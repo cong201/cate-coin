@@ -1,20 +1,41 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CiSearch } from "react-icons/ci";
 import { Button } from "../../components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "../../components/ui/input";
-import MyToken from "../../components/token/MyToken";
 import AllToken from "../../components/token/AllToken";
 import { useActive } from "../../context/ActiveContext";
-import { FaRegMessage } from "react-icons/fa6";
+import { TbMessageChatbot } from "react-icons/tb";
+import axios from "axios";
+import Token from "../../components/token/Token";
 
 export const Route = createFileRoute("/_layoutApp/tokenFree")({
   component: () => {
     const { active } = useActive();
     const [activeButton, setActiveButton] = useState("token");
     const [activeButtonLock, setActiveButtonLock] = useState("allToken");
+    const [tokenData, setTokenData] = useState([]);
+    const getData = async () => {
+      try {
+        const response = await axios.get(
+          "https://api.coingecko.com/api/v3/coins/markets",
+          {
+            params: {
+              vs_currency: "usd",
+            },
+          }
+        );
+        setTokenData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    useEffect(() => {
+      getData();
+    }, []);
     return (
-      <main className="mt-[70px] relative">
+      <main className="pt-[70px] bg-[#00121E]">
         <section
           className={`${!active ? `bg-[#DEDEDE]` : `bg-[#00121E]`} flex gap-[30px] items-center justify-center py-[15px]`}
         >
@@ -92,13 +113,17 @@ export const Route = createFileRoute("/_layoutApp/tokenFree")({
           </div>
         </section>
         <section className={`${active ? `bg-[#10232d]` : `bg-[#f2f1f1]`}`}>
-          {activeButton === "token" ? <MyToken /> : <AllToken />}
+          {activeButton === "token" ? (
+            <Token tokenData={tokenData} />
+          ) : (
+            <AllToken />
+          )}
         </section>
-        <div className="absolute right-10 flex flex-col items-center justify-center">
-          <FaRegMessage className="text-white text-[80px] " />
-          <span className="text-[20px] font-[900] text-white">
-            Your Need Help?
-          </span>
+        <div
+          className={`fixed right-10 bottom-[55px] flex flex-col items-center justify-center ${active ? `text-white hover:text-blue-500` : `text-blue-400 hover:text-blue-500`} hover:cursor-pointer`}
+        >
+          <TbMessageChatbot className="text-[80px]" />
+          <span className="text-[20px] font-[900]">Your Need Help?</span>
         </div>
       </main>
     );
